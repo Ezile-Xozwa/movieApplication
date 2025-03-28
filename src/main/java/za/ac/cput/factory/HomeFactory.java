@@ -1,4 +1,4 @@
-package za.ac.cput.factory;
+
 
 import za.ac.cput.domain.Home;
 import za.ac.cput.util.HomeValidationHelper;
@@ -23,3 +23,4 @@ public class HomeFactory {
     }
 
 }
+
