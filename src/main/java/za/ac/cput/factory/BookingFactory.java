@@ -2,7 +2,11 @@ package za.ac.cput.factory;
 
 import za.ac.cput.domain.*;
 
-// BookingFactory Class (creates Booking objects)
+
+import za.ac.cput.domain.Booking;
+import za.ac.cput.util.BookingGenericHelper;
+
+
 public class BookingFactory {
 
     public static Booking createBooking(int bookingId, User user, Showtime showtime, Seat seat, BookingStatus status) {
