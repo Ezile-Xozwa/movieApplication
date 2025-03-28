@@ -79,6 +79,8 @@ public class Booking {
             return this;
         }
 
+
+        private copy (Booking booking)
         private copy(Booking booking) {
             this.bookingId = booking.bookingId;
             this.user = booking.user;
