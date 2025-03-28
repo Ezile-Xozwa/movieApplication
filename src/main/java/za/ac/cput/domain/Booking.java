@@ -79,7 +79,7 @@ public class Booking {
             return this;
         }
 
-        private Builder(Booking booking) {
+        private copy(Booking booking) {
             this.bookingId = booking.bookingId;
             this.user = booking.user;
             this.showtime = booking.showtime;
