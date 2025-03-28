@@ -7,3 +7,4 @@ public class UserGenericHelper {
         return UUID.randomUUID().toString();
 }
 }
+
