@@ -1,12 +1,12 @@
 package za.ac.cput.domain;
 
-// Booking Entity (used for Ticket Reservations)
 public class Booking {
     private final int bookingId;
-    private final User user; // Assuming you have a User class
-    private final Showtime showtime; // Assuming you have a Showtime class
-    private final Seat seat; // Assuming you have a Seat class
-    private final BookingStatus status;
+    private final User user;
+    private final Showtime showtime;
+    private final Seat seat;
+    private BookingStatus status;
+    public enum BookingStatus {Pending, Confirmed, Cancelled};
 
     private Booking(Builder builder) {
         this.bookingId = builder.bookingId;
@@ -16,7 +16,6 @@ public class Booking {
         this.status = builder.status;
     }
 
-    // Getters
     public int getBookingId() {
         return bookingId;
     }
@@ -37,7 +36,17 @@ public class Booking {
         return status;
     }
 
-    // Static Builder class for Booking
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", user=" + user +
+                ", showtime=" + showtime +
+                ", seat=" + seat +
+                ", status=" + status +
+                '}';
+    }
+
     public static class Builder {
         private int bookingId;
         private User user;
@@ -68,6 +77,14 @@ public class Booking {
         public Builder setStatus(BookingStatus status) {
             this.status = status;
             return this;
+        }
+
+        private Builder(Booking booking) {
+            this.bookingId = booking.bookingId;
+            this.user = booking.user;
+            this.showtime = booking.showtime;
+            this.seat = booking.seat;
+            this.status = booking.status;
         }
 
         public Booking build() {
