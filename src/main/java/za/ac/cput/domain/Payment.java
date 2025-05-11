@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
+/* Payment.java
 
+     Payment POJO class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date: 10 May 2025 */
 // Payment Entity (used for Processing Payments)
 public class Payment {
     private final int paymentId;
@@ -38,6 +44,8 @@ public class Payment {
         private double amount;
         private PaymentStatus status;
 
+
+
         public Builder setPaymentId(int paymentId) {
             this.paymentId = paymentId;
             return this;
@@ -55,6 +63,14 @@ public class Payment {
 
         public Builder setStatus(PaymentStatus status) {
             this.status = status;
+            return this;
+        }
+
+        public Builder copy(Payment payment) {
+            this.paymentId = payment.paymentId;
+            this.booking = payment.booking;
+            this.amount = payment.amount;
+            this.status = payment.status;
             return this;
         }
 
