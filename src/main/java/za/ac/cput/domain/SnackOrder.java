@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
 
+/*SnackOrder. java
+
+    SnackOrder POJO class
+    Author: Sibahle Tyantsi (222457244)
+    Date: 11 May 2025 */
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
