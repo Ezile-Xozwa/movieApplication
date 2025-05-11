@@ -1,5 +1,13 @@
 package za.ac.cput.domain;
 
+/* Review.java
+
+     Review POJO class
+
+     Author: E Xozwa (221321101)
+
+     Date: 11 May 2025 */
+
 import java.time.LocalDateTime;
 
 public class Review {
