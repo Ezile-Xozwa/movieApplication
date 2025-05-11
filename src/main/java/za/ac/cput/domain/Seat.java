@@ -1,5 +1,13 @@
 package za.ac.cput.domain;
 
+/* Seat.java
+
+     Seat POJO class
+
+     Author: E Xozwa (221321101)
+
+     Date: 11 May 2025 */
+
 public class Seat {
 
     private String seatId;
