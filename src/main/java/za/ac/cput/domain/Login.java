@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
+/*Login.java
 
+     Login POJO class
+
+     Author: Katie Khezani Tolo (222831960)
+
+     Date: 11 May 2025 */
 public class Login {
     private String loginId;
     private String email;
@@ -72,7 +78,7 @@ public class Login {
             return this;
         }
 
-        public Builder copy(Login login) {
+        public Builder copy (Login login) {
             this.loginId = login.loginId;
             this.email = login.email;
             this.password = login.password;
@@ -85,3 +91,4 @@ public class Login {
         }
     }
 }
+
