@@ -1,5 +1,13 @@
 package za.ac.cput.domain;
 
+/*User.java
+
+     User POJO class
+
+     Author: Ayanda Nongxa (204513723)
+
+     Date: 11 May 2025 */
+
 import java.time.LocalDate;
 
 public class User {
