@@ -13,6 +13,9 @@ public class Payment {
     private final double amount;
     private final PaymentStatus status;
 
+     public enum PaymentStatus {
+    PENDING, SUCCESS, FAILED
+}
     private Payment(Builder builder) {
         this.paymentId = builder.paymentId;
         this.booking = builder.booking;
@@ -37,12 +40,16 @@ public class Payment {
         return status;
     }
 
+     
+
     // Static Builder class for Payment
     public static class Builder {
         private int paymentId;
         private Booking booking;
         private double amount;
         private PaymentStatus status;
+
+
 
         public Builder setPaymentId(int paymentId) {
             this.paymentId = paymentId;
@@ -61,6 +68,14 @@ public class Payment {
 
         public Builder setStatus(PaymentStatus status) {
             this.status = status;
+            return this;
+        }
+
+        public Builder copy(Payment payment) {
+            this.paymentId = payment.paymentId;
+            this.booking = payment.booking;
+            this.amount = payment.amount;
+            this.status = payment.status;
             return this;
         }
 

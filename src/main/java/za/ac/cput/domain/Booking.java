@@ -74,8 +74,8 @@ public class Booking {
             return this;
         }
 
-
         private Builder copy(Booking booking) {
+
             this.bookingId = booking.bookingId;
             this.user = booking.user;
             this.showtime = booking.showtime;
