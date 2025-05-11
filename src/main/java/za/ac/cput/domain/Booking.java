@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
+/* Booking.java
 
+     Booking POJO class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date: 10 May 2025 */
 public class Booking {
     private String bookingId;
     private User user;
