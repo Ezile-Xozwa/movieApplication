@@ -1,4 +1,4 @@
-package za.ac.cput.repository.implementation;
+package za.ac.cput.repository;
 
-public class PaymentRepositoryImplementation {
+public class PaymentRepository {
 }
