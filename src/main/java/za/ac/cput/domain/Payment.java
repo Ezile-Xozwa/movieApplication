@@ -13,6 +13,9 @@ public class Payment {
     private final double amount;
     private final PaymentStatus status;
 
+     public enum PaymentStatus {
+    PENDING, SUCCESS, FAILED
+}
     private Payment(Builder builder) {
         this.paymentId = builder.paymentId;
         this.booking = builder.booking;
@@ -36,6 +39,8 @@ public class Payment {
     public PaymentStatus getStatus() {
         return status;
     }
+
+     
 
     // Static Builder class for Payment
     public static class Builder {
