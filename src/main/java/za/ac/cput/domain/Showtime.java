@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
+/*Showtime.java
 
+     Showtime POJO class
+
+     Author: Katie Khezani Tolo (222831960)
+
+     Date: 11 May 2025 */
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
