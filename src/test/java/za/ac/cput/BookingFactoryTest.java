@@ -1,5 +1,11 @@
 package za.ac.cput;
+/* Booking.java
 
+     Booking Tester class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date:  */
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.*;
 import za.ac.cput.factory.BookingFactory;
@@ -12,7 +18,7 @@ class BookingFactoryTest {
     void createBooking_success() {
         User user = new User.Builder()
                 .setUserId("1")
-                .setName("John Doe")
+                .setName("Jane Doe")
                 .build();
 
         Showtime showtime = new Showtime.Builder()
@@ -20,25 +26,25 @@ class BookingFactoryTest {
                 .build();
 
         Seat seat = new Seat.Builder()
-                .setSeatNumber(12)
+                .setSeatNumber(5)
                 .build();
 
-        Booking booking = BookingFactory.createBooking("1", user, showtime, seat);
+        Booking booking = BookingFactory.createBooking(1, user, showtime, seat);
 
         assertNotNull(booking);
         assertEquals(1, booking.getBookingId());
-        assertEquals("John Doe", booking.getUser().getName());
-        assertEquals("C12", booking.getSeat().getSeatNumber());
+        assertEquals("Jane Doe", booking.getUser().getName());
+        assertEquals("A5", booking.getSeat().getSeatNumber());
     }
 
     @Test
-    void createBooking_withNullUser_shouldThrow() {
-        Showtime showtime = new Showtime.Builder().setShowtimeId("1").build();
-        Seat seat = new Seat.Builder().setSeatNumber(1).build();
+    void createBooking_nullSeat_shouldThrow() {
+        User user = new User.Builder().setUserId("2").setName("Tom").build();
+        Showtime showtime = new Showtime.Builder().setShowtimeId("202").build();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                BookingFactory.createBooking("1", null, showtime, seat)
+                BookingFactory.createBooking("2", user, showtime, null)
         );
-        assertEquals("User, Showtime, and Seat cannot be null", exception.getMessage());
+        assertEquals("Invalid seat", exception.getMessage());
     }
 }

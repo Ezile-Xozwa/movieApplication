@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
-/* Booking.java
+/* Payment.java
 
-     Booking POJO class
+     Payment Factory class
 
      Author: Herold M Ubisi (222662786)
 
