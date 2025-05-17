@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
 /* Booking.java
 
-     Booking POJO class
+     Booking Factory class
 
      Author: Herold M Ubisi (222662786)
 
@@ -10,6 +10,7 @@ import za.ac.cput.domain.Booking;
 import za.ac.cput.domain.User;
 import za.ac.cput.domain.Showtime;
 import za.ac.cput.domain.Seat;
+import za.ac.cput.util.BookingValidationHelper;
 
 public class BookingFactory {
 
