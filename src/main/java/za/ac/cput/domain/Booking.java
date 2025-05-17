@@ -12,6 +12,7 @@ public class Booking {
     private Showtime showtime;
     private Seat seat;
 
+
     private Booking(){
 
     }

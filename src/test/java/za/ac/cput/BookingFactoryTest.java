@@ -1,44 +1,44 @@
 package za.ac.cput;
 
-import org.junit.Test;
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.*;
 import za.ac.cput.factory.BookingFactory;
-import za.ac.cput.util.BookingGenericHelper;
 
-import static junit.framework.Assert.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookingFactoryTest {
 
     @Test
-    void createBooking_Success() {
-
-        User user = new User();
-        Showtime showtime = new Showtime();
-        Seat seat = new Seat.Builder()
-                .setSeatId(BookingGenericHelper.generateID())
-                .setRow('A')
-                .setSeatNumber(10)
-                .setStatus(Seat.Status.Available)
+    void createBooking_success() {
+        User user = new User.Builder()
+                .setUserId("1")
+                .setName("John Doe")
                 .build();
 
-        // Create a Booking
-        Booking booking = BookingFactory.createBooking(1, user, showtime, seat, Booking.BookingStatus.Confirmed);
+        Showtime showtime = new Showtime.Builder()
+                .setShowtimeId("101")
+                .build();
+
+        Seat seat = new Seat.Builder()
+                .setSeatNumber(12)
+                .build();
+
+        Booking booking = BookingFactory.createBooking("1", user, showtime, seat);
 
         assertNotNull(booking);
         assertEquals(1, booking.getBookingId());
-        assertEquals(user, booking.getUser());
-        assertEquals(showtime, booking.getShowtime());
-        assertEquals(seat, booking.getSeat());
-        assertEquals(Booking.BookingStatus.Confirmed, booking.getStatus());
-
-        System.out.println(booking);
+        assertEquals("John Doe", booking.getUser().getName());
+        assertEquals("C12", booking.getSeat().getSeatNumber());
     }
 
     @Test
-    void createBooking_Failure_NullValues() {
-        Booking booking = BookingFactory.createBooking(2, null, null, null, null);
-        assertNull(booking, "Booking should be null when invalid data is provided.");
+    void createBooking_withNullUser_shouldThrow() {
+        Showtime showtime = new Showtime.Builder().setShowtimeId("1").build();
+        Seat seat = new Seat.Builder().setSeatNumber(1).build();
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                BookingFactory.createBooking("1", null, showtime, seat)
+        );
+        assertEquals("User, Showtime, and Seat cannot be null", exception.getMessage());
     }
 }
