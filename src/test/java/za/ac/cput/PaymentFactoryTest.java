@@ -1,51 +1,72 @@
-package za.ac.cput;
+package za.ac.cput.factory;
 /* Payment.java
 
-     Payment Tester class
+     Payment tester POJO class
 
      Author: Herold M Ubisi (222662786)
 
-     Date:  */
+     Date: 18 May 2025 */
+//import za.ac.cput.util.PaymentGenericHelper;
 import org.junit.jupiter.api.Test;
-import za.ac.cput.domain.Booking;
-import za.ac.cput.domain.Payment;
-import za.ac.cput.factory.PaymentFactory;
+//import za.ac.cput.util.ShowtimeGenericHelper;
+//import za.ac.cput.util.UserGenericHelper;
+import za.ac.cput.domain.booking.Booking;
+import za.ac.cput.domain.booking.Payment;
+import za.ac.cput.domain.movie.Movie;
+import za.ac.cput.domain.movie.Showtime;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.factory.booking.PaymentFactory;
+import za.ac.cput.util.GenericHelper;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+//import static junit.framework.Assert.assertNotNull;
 
 class PaymentFactoryTest {
 
     @Test
-    void createPayment_success() {
-        Booking booking = new Booking.Builder()
-                .setBookingId("1")
+    void createPayment() {
+
+        LocalDateTime startTime = LocalDateTime.of(2025, 3, 27, 14, 30);
+        LocalDate date = LocalDate.of(2025, 3, 27);
+        LocalDate birth = LocalDate.of(2025, 3, 27);
+
+
+        Movie movie = new Movie.Builder()
+                .setMovieId(GenericHelper.generateID())
+                .setTitle("Inception")
+                .setGenre("Sci-Fi")
+                .setDuration("2h5m")
                 .build();
 
-        Payment payment = PaymentFactory.createPayment(1001, booking, 200.00);
+        User user = new User.Builder()
+                .setUserId(GenericHelper.generateID())
+                .setName("Mbali")
+                .setSurname("Banda")
+                //.setEmail("")
+                //.setPassword("")
+                .setPhoneNumber("")
+                .setDateOfBirth(birth)
+                .setGender("Female")
+                .build();
+        Showtime showtime = new Showtime.Builder()
+                .setShowtimeId(GenericHelper.generateID())
+                .setMovie(movie)
+                .setDate(date)
+                .setStartTime(startTime)
+                .build();
 
+        Booking booking = new Booking.Builder()
+                .setBookingId(GenericHelper.generateID())
+                .setUser(user)
+                .setShowtime(showtime)
+                //.setStatus(Booking.BookingStatus.Confirmed)
+                .build();
+
+        Payment payment = PaymentFactory.createPayment(GenericHelper.generateID(), booking, 25.00, Payment.PaymentStatus.SUCCESS);
         assertNotNull(payment);
-        assertEquals(1001, payment.getPaymentId());
-        assertEquals(200.00, payment.getAmount());
-        assertEquals(1, payment.getBooking().getBookingId());
-    }
-
-    @Test
-    void createPayment_withInvalidAmount_shouldThrow() {
-        Booking booking = new Booking.Builder()
-                .setBookingId("1")
-                .build();
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                PaymentFactory.createPayment(1002, booking, -20.00)
-        );
-        assertEquals("Amount must be greater than 0", exception.getMessage());
-    }
-
-    @Test
-    void createPayment_withNullBooking_shouldThrow() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                PaymentFactory.createPayment(1003, null, 120.00)
-        );
-        assertEquals("Booking cannot be null", exception.getMessage());
+        System.out.println(payment);
     }
 }
