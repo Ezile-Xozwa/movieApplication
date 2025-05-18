@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginFactoryTest {
 
     @Test
-    public void testCreateLoginSuccess() {
+      void testCreateLoginSuccess() {
         Login login = LoginFactory.createLogin(
                 "L001",
                 "admin@example.com",
@@ -31,7 +31,7 @@ class LoginFactoryTest {
     }
 
     @Test
-    public void testCreateLoginWithInvalidData() {
+     void testCreateLoginWithInvalidData() {
         Login login = LoginFactory.createLogin(
                 "", // invalid loginId
                 "user@example.com",
