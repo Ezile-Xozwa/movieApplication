@@ -1,11 +1,11 @@
 package za.ac.cput;
 /* Booking.java
 
-     Booking Tester class
+     Booking Tester POJO class
 
      Author: Herold M Ubisi (222662786)
 
-     Date:  */
+     Date: 10 May 2025 */
 import org.junit.jupiter.api.Test;
 import za.ac.cput.domain.*;
 import za.ac.cput.factory.BookingFactory;
@@ -29,7 +29,7 @@ class BookingFactoryTest {
                 .setSeatNumber(5)
                 .build();
 
-        Booking booking = BookingFactory.createBooking(1, user, showtime, seat);
+        Booking booking = BookingFactory.createBooking("1", user, showtime, seat);
 
         assertNotNull(booking);
         assertEquals(1, booking.getBookingId());
