@@ -43,7 +43,5 @@ class LoginFactoryTest {
     }
 }
 
-        assertNull(login); // Should return null due to invalid loginId
-    }
-}
+     
 
