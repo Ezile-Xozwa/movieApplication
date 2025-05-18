@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ShowtimeFactoryTest {
 
     @Test
-    public void createShowtime() {
+     void createShowtime() {
         LocalDateTime startTime = LocalDateTime.of(2025, 3, 27, 14, 30);
         LocalDate date = LocalDate.of(2025, 3, 27);
         Showtime showtime = ShowtimeFactory.createShowtime(
@@ -32,7 +32,5 @@ public class ShowtimeFactoryTest {
 
         assertNotNull(showtime);
     }
-
-}
 
 }
