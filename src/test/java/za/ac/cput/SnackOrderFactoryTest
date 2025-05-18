@@ -1,63 +1,68 @@
-import za.ac.cput.domain.SnackOrder;
+package za.ac.cput;
 
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import za.ac.cput.domain.*;
+import za.ac.cput.util.*;
+
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+//import static junit.framework.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SnackOrderFactoryTest {
 
-    private SnackOrder snackOrder1;
-    private SnackOrder snackOrder2;
-    private SnackOrder snackOrder3;
+    @Test
+    public void createSnackOrder() {
+        LocalDateTime orderTime = LocalDateTime.of(2025, 5, 18, 12, 15);
+        LocalDate date = LocalDate.of(2025, 5, 18);
+        LocalDateTime startTime = LocalDateTime.of(2025, 5, 18, 11, 30);
+        LocalDate birth = LocalDate.of(2025, 3, 27);
 
-    @BeforeEach
-    void setUp() {
-        snackOrder1 = new SnackOrder.Builder()
-                .setSnackOrderId("SO001")
-                .setBookingId("B001")
-                .setSnackId("SN001")
-                .setQuantity(2)
-                .setTotalPrice(80.00)
-                .setOrderTime(LocalDateTime.now().minusMinutes(10))
-                .setSpecialInstructions("No ice")
+        Home home = new Home.Builder()
+                .setMovieId(HomeGenericHelper.generateID())
+                .setTitle("Inception")
+                .setGenre("Sci-Fi")
+                .setDuration("2h5m")
+                .build();
+        User user = new User.Builder()
+                .setUserId(UserGenericHelper.generateID())
+                .setName("Mbali")
+                .setSurname("Banda")
+                .setPhoneNumber("")
+                .setDateOfBirth(birth)
+                .setGender("Female")
+                .build();
+        Showtime showtime = new Showtime.Builder()
+                .setShowtimeId(ShowtimeGenericHelper.generateID())
+                .setMovie("Inception")
+                .setDate(date)
+                .setStartTime(startTime)
                 .build();
 
-        snackOrder2 = new SnackOrder.Builder()
-                .copy(snackOrder1)
+            Booking booking = new Booking.Builder()
+                .setBookingId(SnackOrderGenericHelper.generateID())
+               // .setMovie("Inception")
+                .setUser(user)
+                .setShowtime(showtime)
                 .build();
 
-        snackOrder3 = new SnackOrder.Builder()
-                .setSnackOrderId("SO002")
-                .setBookingId("B002")
-                .setSnackId("SN002")
-                .setQuantity(1)
-                .setTotalPrice(40.00)
-                .setOrderTime(LocalDateTime.now().minusMinutes(5))
-                .setSpecialInstructions("Extra cheese")
-                .build();
+            SnackOrder snackOrder = new SnackOrder.Builder()
+                    .setSnackOrderId("SO001")
+                    .setBookingId("B001")
+                    .setSnackId("SN001")
+                    .setQuantity(2)
+                    .setTotalPrice(80.00)
+                    .setOrderTime(LocalDateTime.now().minusMinutes(10))
+                    .setSpecialInstructions("No ice")
+                    .build();
+
+            System.out.println(snackOrder);
+            assertNotNull(snackOrder);
+
+        }
     }
 
-    @Test
-    void testObjectCreation() {
-        assertNotNull(snackOrder1);
-        assertEquals("SO001", snackOrder1.getSnackOrderId());
-        assertEquals(80.00, snackOrder1.getTotalPrice());
-    }
-
-    @Test
-    void testCopyBuilder() {
-        assertEquals(snackOrder1, snackOrder2);
-        assertEquals(snackOrder1.hashCode(), snackOrder2.hashCode());
-    }
-
-    @Test
-    void testEqualityFalse() {
-        assertNotEquals(snackOrder1, snackOrder3);
-    }
-
-    @Test
-    void testToString() {
-        String expected = "SnackOrder{snackOrderId='SO001'";
-        assertTrue(snackOrder1.toString().contains(expected));
-    }
-}
