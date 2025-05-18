@@ -1,0 +1,63 @@
+import za.ac.cput.domain.SnackOrder;
+
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class SnackOrderFactoryTest {
+
+    private SnackOrder snackOrder1;
+    private SnackOrder snackOrder2;
+    private SnackOrder snackOrder3;
+
+    @BeforeEach
+    void setUp() {
+        snackOrder1 = new SnackOrder.Builder()
+                .setSnackOrderId("SO001")
+                .setBookingId("B001")
+                .setSnackId("SN001")
+                .setQuantity(2)
+                .setTotalPrice(80.00)
+                .setOrderTime(LocalDateTime.now().minusMinutes(10))
+                .setSpecialInstructions("No ice")
+                .build();
+
+        snackOrder2 = new SnackOrder.Builder()
+                .copy(snackOrder1)
+                .build();
+
+        snackOrder3 = new SnackOrder.Builder()
+                .setSnackOrderId("SO002")
+                .setBookingId("B002")
+                .setSnackId("SN002")
+                .setQuantity(1)
+                .setTotalPrice(40.00)
+                .setOrderTime(LocalDateTime.now().minusMinutes(5))
+                .setSpecialInstructions("Extra cheese")
+                .build();
+    }
+
+    @Test
+    void testObjectCreation() {
+        assertNotNull(snackOrder1);
+        assertEquals("SO001", snackOrder1.getSnackOrderId());
+        assertEquals(80.00, snackOrder1.getTotalPrice());
+    }
+
+    @Test
+    void testCopyBuilder() {
+        assertEquals(snackOrder1, snackOrder2);
+        assertEquals(snackOrder1.hashCode(), snackOrder2.hashCode());
+    }
+
+    @Test
+    void testEqualityFalse() {
+        assertNotEquals(snackOrder1, snackOrder3);
+    }
+
+    @Test
+    void testToString() {
+        String expected = "SnackOrder{snackOrderId='SO001'";
+        assertTrue(snackOrder1.toString().contains(expected));
+    }
+}
