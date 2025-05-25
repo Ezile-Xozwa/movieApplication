@@ -1,4 +1,8 @@
 package za.ac.cput.repository;
 
-public interface HomeRepository {
+import za.ac.cput.domain.Home;
+import java.util.Set;
+
+public interface HomeRepository extends IRepository<Home, String> {
+    Set<Home> getAll();
 }

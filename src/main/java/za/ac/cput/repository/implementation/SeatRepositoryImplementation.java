@@ -2,9 +2,9 @@ package za.ac.cput.repository.implementation;
 
 import za.ac.cput.domain.Seat;
 import za.ac.cput.repository.SeatRepository;
-
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class SeatRepositoryImplementation implements SeatRepository {
     private Set<Seat> seatsDB;
