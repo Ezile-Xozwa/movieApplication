@@ -1,0 +1,69 @@
+package com.startup.repository.implementation;
+
+import com.startup.repository.SnackOrderRepository;
+import za.ac.cput.domain.SnackOrder;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Optional;
+
+/**
+ * SnackOrderRepositoryImplementation.java
+ * Repository implementation for SnackOrder
+ * Author: Sibahle
+ * Date: 25 MAY 2025
+ */
+
+public class SnackOrderRepositorymplementation implements SnackOrderRepository {
+
+    private static SnackOrderRepositorymplementation repository = null;
+    private final Set<SnackOrder> snackOrderDB;
+
+    private SnackOrderRepositoryImplementation() {
+        this.snackOrderDB = new HashSet<>();
+    }
+
+    public static SnackOrderRepositorymplementation getRepository() {
+        if (repository == null)
+            repository = new SnackOrderRepositoryImpl();
+        return repository;
+    }
+
+    @Override
+    public SnackOrder create(SnackOrder snackOrder) {
+        this.snackOrderDB.add(snackOrder);
+        return snackOrder;
+    }
+
+    @Override
+    public SnackOrder read(String snackOrderId) {
+        return this.snackOrderDB.stream()
+                .filter(order -> order.getSnackOrderId().equals(snackOrderId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public SnackOrder update(SnackOrder snackOrder) {
+        SnackOrder existingOrder = read(snackOrder.getSnackOrderId());
+        if (existingOrder != null) {
+            this.snackOrderDB.remove(existingOrder);
+            this.snackOrderDB.add(snackOrder);
+            return snackOrder;
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(String snackOrderId) {
+        SnackOrder snackOrder = read(snackOrderId);
+        if (snackOrder != null) {
+            this.snackOrderDB.remove(snackOrder);
+        }
+    }
+
+    @Override
+    public Set<SnackOrder> getAll() {
+        return this.snackOrderDB;
+    }
+}
