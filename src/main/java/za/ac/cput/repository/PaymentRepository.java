@@ -1,12 +1,18 @@
 package za.ac.cput.repository;
+/* Payment.java
+
+     Payment Repo class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date: 18 May 2025 */
 
 import za.ac.cput.domain.Payment;
 
 import java.util.*;
 
-// PaymentRepository Class (stores and manages Payment entities)
-public class PaymentRepository implements IRepository<Payment, Integer> {
-    private Map<Integer, Payment> payments = new HashMap<>();
+public class PaymentRepository implements IRepository<Payment, String> {
+    private final Map<String, Payment> payments = new HashMap<>();
 
     @Override
     public Payment create(Payment payment) {
@@ -15,7 +21,7 @@ public class PaymentRepository implements IRepository<Payment, Integer> {
     }
 
     @Override
-    public Payment read(Integer id) {
+    public Payment read(String id) {
         return payments.get(id);
     }
 
@@ -29,7 +35,7 @@ public class PaymentRepository implements IRepository<Payment, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         payments.remove(id);
     }
 

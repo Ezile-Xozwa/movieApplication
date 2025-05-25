@@ -1,5 +1,11 @@
 package za.ac.cput.domain;
 
+/*Home. java
+
+    Home POJO class
+    Author: Sibahle Tyantsi (222457244)
+    Date: 11 May 2025 */
+
 public class Home {
     private final String movieId;
     private final String title;

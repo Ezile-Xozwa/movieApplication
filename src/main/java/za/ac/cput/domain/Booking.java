@@ -1,22 +1,30 @@
 package za.ac.cput.domain;
+/* Booking.java
 
+     Booking POJO class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date: 10 May 2025 */
 public class Booking {
-    private final int bookingId;
-    private final User user;
-    private final Showtime showtime;
-    private final Seat seat;
-    private BookingStatus status;
-    public enum BookingStatus {Pending, Confirmed, Cancelled};
+    private String bookingId;
+    private User user;
+    private Showtime showtime;
+    private Seat seat;
+
+
+    private Booking(){
+
+    }
 
     private Booking(Builder builder) {
         this.bookingId = builder.bookingId;
         this.user = builder.user;
         this.showtime = builder.showtime;
         this.seat = builder.seat;
-        this.status = builder.status;
     }
 
-    public int getBookingId() {
+    public String getBookingId() {
         return bookingId;
     }
 
@@ -32,29 +40,22 @@ public class Booking {
         return seat;
     }
 
-    public BookingStatus getStatus() {
-        return status;
-    }
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "bookingId=" + bookingId +
-                ", user=" + user +
-                ", showtime=" + showtime +
-                ", seat=" + seat +
-                ", status=" + status +
-                '}';
+        return "bookingId:" + bookingId + "\n"
+                + " user=" + user + "\n"
+                + " showtime=" + showtime + "\n"
+                + " seat=" + seat + "\n";
     }
 
     public static class Builder {
-        private int bookingId;
+        private String bookingId;
         private User user;
         private Showtime showtime;
         private Seat seat;
-        private BookingStatus status;
 
-        public Builder setBookingId(int bookingId) {
+        public Builder setBookingId(String bookingId) {
             this.bookingId = bookingId;
             return this;
         }
@@ -74,19 +75,13 @@ public class Booking {
             return this;
         }
 
-        public Builder setStatus(BookingStatus status) {
-            this.status = status;
-            return this;
-        }
+        private Builder copy(Booking booking) {
 
-
-        private copy (Booking booking)
-        private copy(Booking booking) {
             this.bookingId = booking.bookingId;
             this.user = booking.user;
             this.showtime = booking.showtime;
             this.seat = booking.seat;
-            this.status = booking.status;
+            return this;
         }
 
         public Booking build() {

@@ -1,4 +1,5 @@
-package za.ac.cput.repository.implemenataion;
+/*
+package za.ac.cput.repository.implementation;
 
 import za.ac.cput.domain.Booking;
 
@@ -46,3 +47,4 @@ public class BookingRepository implements BookingRepository {
     }
 }
 
+*/

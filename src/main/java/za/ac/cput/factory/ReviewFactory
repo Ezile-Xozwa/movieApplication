@@ -1,0 +1,36 @@
+package za.ac.cput.factory;
+
+import za.ac.cput.domain.movie.Movie;
+import za.ac.cput.domain.review.Review;
+import za.ac.cput.domain.user.User;
+import za.ac.cput.util.ReviewValidationHelper;
+
+import java.time.LocalDateTime;
+
+public class ReviewFactory {
+
+    public static Review createReview(String reviewId, User user, Movie movie, double rating, String comment, LocalDateTime timestamp, Review.isSpoiler spoiler) {
+
+
+        if (ReviewValidationHelper.isEmptyOrNull(reviewId)
+            || !ReviewValidationHelper.isValidUser(user)
+            || !ReviewValidationHelper.isValidMovie(movie)
+            || !ReviewValidationHelper.isRatingValid(rating)
+            || ReviewValidationHelper.isEmptyOrNull(comment)
+            || !ReviewValidationHelper.isValidTimeStamp(timestamp)
+            || !ReviewValidationHelper.isValidSpoilerWarning(spoiler)){
+            return null;
+        }
+
+
+        return new Review.Builder()
+                .setReviewId(reviewId)
+                .setUser(user)
+                .setMovie(movie)
+                .setRating(rating)
+                .setComment(comment)
+                .setTimestamp(timestamp)
+                .setSpoiler(spoiler)
+                .build();
+    }
+}
