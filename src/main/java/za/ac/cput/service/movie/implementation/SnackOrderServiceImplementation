@@ -1,0 +1,59 @@
+package com.startup.service.impl;
+
+import com.startup.repository.impl.SnackOrderRepositoryImpl;
+import com.startup.repository.SnackOrderRepository;
+import com.startup.service.SnackOrderService;
+import za.ac.cput.domain.SnackOrder;
+import org.springframework.stereotype.Service;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Service
+public class SnackOrderServiceImplementation implements SnackOrderService {
+
+    private static SnackOrderServiceImplementation service = null;
+    private final SnackOrderRepository repository;
+
+    private SnackOrderServiceImplementation() {
+        this.repository = SnackOrderRepositoryImplementation.getRepository();
+    }
+
+    public static SnackOrderServiceImplementation getService() {
+        if (service == null)
+            service = new SnackOrderServiceImplementation();
+        return service;
+    }
+
+    @Override
+    public SnackOrder create(SnackOrder snackOrder) {
+        return this.repository.create(snackOrder);
+    }
+
+    @Override
+    public SnackOrder read(String id) {
+        return this.repository.read(id);
+    }
+
+    @Override
+    public SnackOrder update(SnackOrder snackOrder) {
+        return this.repository.update(snackOrder);
+    }
+
+    @Override
+    public void delete(String id) {
+        this.repository.delete(id);
+    }
+
+    @Override
+    public Set<SnackOrder> getAll() {
+        return this.repository.getAll();
+    }
+
+    @Override
+    public Set<SnackOrder> getOrdersWithInstructions() {
+        return getAll().stream()
+                .filter(order -> order.getSpecialInstructions() != null && !order.getSpecialInstructions().isEmpty())
+                .collect(Collectors.toSet());
+    }
+}
