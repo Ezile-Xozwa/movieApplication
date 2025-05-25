@@ -1,5 +1,11 @@
 package za.ac.cput.factory;
+/*ShowtimeFactory.java
 
+     ShowtimeFactoryclass
+
+     Author: Katie Khezani Tolo (222831960)
+
+     Date: 17 May 2025 */
 import za.ac.cput.domain.Showtime;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
