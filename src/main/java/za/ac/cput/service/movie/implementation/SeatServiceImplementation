@@ -1,0 +1,64 @@
+package za.ac.cput.service.movie.implememtation;
+
+import za.ac.cput.domain.movie.Seat;
+import za.ac.cput.repository.movie.SeatRepository;
+import za.ac.cput.repository.movie.implementation.SeatRepositoryImplementation;
+import za.ac.cput.service.movie.SeatService;
+
+
+import java.util.Set;
+
+public class SeatServiceImplementation implements SeatService {
+
+    private static SeatService seatService = null;
+    private static SeatRepository seatRepository;
+
+
+    private SeatServiceImplementation() {
+        this.seatRepository = SeatRepositoryImplementation.getSeatRepository();
+    }
+
+    public static SeatService getSeatService() {
+        if (seatService == null)  seatService = new SeatServiceImplementation();
+        return seatService;
+    }
+
+    @Override
+    public Set<Seat> getSeats() {
+        return this.seatRepository.getAll();
+        //return this.seatRepository.getSeats();
+    }
+
+//    @Override
+//    public Set<Seat> getSeatsInRowB() { //you can also implement in Repo if function is too big
+//        Set<Seat> allSeats = getSeats();
+//        for(Seat seat1 : allSeats) {
+//            if(seat1.getRow('B')){
+//                allSeats.add(seat1);
+//            }
+//        }
+//        return allSeats;
+//    }
+
+    @Override
+    public Seat create(Seat seat) {
+        return this.seatRepository.create(seat);
+    }
+
+    @Override
+    public Seat read(String s) {
+        //return this.seatRepository.read(s);
+        return this.seatRepository.read(1);
+    }
+
+    @Override
+    public Seat update(Seat seat) {
+        return this.seatRepository.update(seat);
+    }
+
+    @Override
+    public void delete(String s) {
+        //this.seatRepository.delete(s);
+        this.seatRepository.delete(1);
+    }
+}
