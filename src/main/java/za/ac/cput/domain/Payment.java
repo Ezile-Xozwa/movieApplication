@@ -1,9 +1,19 @@
 package za.ac.cput.domain;
+/* Payment.java
 
-// Payment Entity (used for Processing Payments)
+     Payment POJO class
+
+     Author: Herold M Ubisi (222662786)
+
+     Date: 10 May 2025 */
+
 public class Payment {
-    private final int paymentId;
-    private final Booking booking; // Assuming Booking is already created
+    public enum PaymentStatus {
+        PENDING, SUCCESS, FAILED
+    }
+
+    private final String paymentId;
+    private final Booking booking;
     private final double amount;
     private final PaymentStatus status;
 
@@ -14,8 +24,7 @@ public class Payment {
         this.status = builder.status;
     }
 
-    // Getters
-    public int getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
@@ -31,14 +40,13 @@ public class Payment {
         return status;
     }
 
-    // Static Builder class for Payment
     public static class Builder {
-        private int paymentId;
+        private String paymentId;
         private Booking booking;
         private double amount;
         private PaymentStatus status;
 
-        public Builder setPaymentId(int paymentId) {
+        public Builder setPaymentId(String paymentId) {
             this.paymentId = paymentId;
             return this;
         }
@@ -55,6 +63,14 @@ public class Payment {
 
         public Builder setStatus(PaymentStatus status) {
             this.status = status;
+            return this;
+        }
+
+        public Builder copy(Payment payment) {
+            this.paymentId = payment.getPaymentId();
+            this.booking = payment.getBooking();
+            this.amount = payment.getAmount();
+            this.status = payment.getStatus();
             return this;
         }
 
