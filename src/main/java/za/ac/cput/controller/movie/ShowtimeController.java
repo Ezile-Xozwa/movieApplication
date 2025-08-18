@@ -1,13 +1,15 @@
-package za.ac.cput.controller;
-/*ShowtimeController.java
+package za.ac.cput.controller.movie;
 
-     Author: Katie Khezani Tolo (222831960)
+/* ShowtimeController.java
+   Author: Katie Khezani Tolo (222831960)
+   Date: 25 May 2025
+*/
 
-     Date: 25 May 2025 */
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Showtime;
-import za.ac.cput.repository.ShowtimeRepository;
+import za.ac.cput.factory.ShowtimeFactory;
+import za.ac.cput.service.implementation.ShowtimeServiceImplementation;
 
 import java.util.Set;
 
@@ -15,35 +17,37 @@ import java.util.Set;
 @RequestMapping("/api/showtime")
 public class ShowtimeController {
 
-    private final ShowtimeRepository showtimeRepository;
-
     @Autowired
-    public ShowtimeController(ShowtimeRepository showtimeRepository) {
-        this.showtimeRepository = showtimeRepository;
-    }
+    private ShowtimeServiceImplementation showtimeService;
 
-    @PostMapping
+    @PostMapping("/create")
     public Showtime create(@RequestBody Showtime showtime) {
-        return showtimeRepository.create(showtime);
+        Showtime newShowtime = ShowtimeFactory.createShowtime(
+                showtime.getShowtimeId(),
+                showtime.getMovieId(),
+                showtime.getDateTime()
+        );
+        return showtimeService.create(newShowtime);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/read/{id}")
     public Showtime read(@PathVariable String id) {
-        return showtimeRepository.read(id);
+        return showtimeService.read(id);
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Showtime update(@RequestBody Showtime showtime) {
-        return showtimeRepository.update(showtime);
+        return showtimeService.update(showtime);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        showtimeRepository.delete(id);
-    }
-
-    @GetMapping
+    @GetMapping("/all")
     public Set<Showtime> getAll() {
-        return showtimeRepository.getAll();
+        return showtimeService.getAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable String id) {
+        showtimeService.delete(id);
     }
 }
+
