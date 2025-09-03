@@ -1,0 +1,30 @@
+# Java
+target/
+!src/main/resources/application.properties
+
+# Maven
+.mvn/
+.m2/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Node.js
+node_modules/
+dist/
+dist-server/
+.npm
+.cache
+
+# Logs
+*.log
+logs
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+.local
