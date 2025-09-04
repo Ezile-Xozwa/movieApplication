@@ -23,7 +23,8 @@ public class PaymentServiceImplementation implements PaymentService {
     @Override
     public Set<Payment> getAll() {
         return getPayments();
-
+    }
+    
     @Override
     public Set<Payment> getPayments() {
         return new HashSet<>(paymentRepository.findAll());
